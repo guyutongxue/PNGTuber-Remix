@@ -58,6 +58,7 @@ func _on_delete_button_pressed():
 		if i != null && is_instance_valid(i):
 			i.treeitem.free()
 			i.queue_free()
+	Global.held_sprites.clear()
 	Global.deselect.emit()
 
 func _on_duplicate_button_pressed():

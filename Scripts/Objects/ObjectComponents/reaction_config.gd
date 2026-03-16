@@ -37,81 +37,48 @@ func should_disappear(key):
 				%Drag.visible = true
 				actor.was_active_before = true
 
-func update_to_mode_change(mode : int):
-	match mode:
-		0:
-			%Pos.show()
-			if actor.get_value("should_blink"):
-				if actor.get_value("open_eyes"):
-					if !blinking:
-						%Pos.modulate.a = 1
-					elif blinking:
-						%Pos.modulate.a = 0.2
+func update_to_mode_change(mode: int):
 
-				elif !actor.get_value("open_eyes"):
-					if blinking:
-						%Pos.modulate.a = 1
-					elif !blinking:
-						%Pos.modulate.a = 0.2
+	if mode == 1:
+		%Pos.modulate.a = 1
+		if actor.get_value("should_blink"):
+			if actor.get_value("open_eyes"):
+				if !blinking:
+					%Pos.show()
+				elif blinking:
+					%Pos.hide()
 
-			
+			elif !actor.get_value("open_eyes"):
+				if blinking:
+					%Pos.show()
+				elif !blinking:
+					%Pos.hide()
+
+		%Rotation.modulate.a = 1
+		if actor.get_value("should_talk"):
+			if actor.get_value("open_mouth"):
+				if currently_speaking:
+					%Rotation.show()
+				else:
+					%Rotation.hide()
+
+			elif !actor.get_value("open_mouth"):
+				if !currently_speaking:
+					%Rotation.show()
+				else:
+					%Rotation.hide()
+		else:
 			%Rotation.show()
-			if actor.get_value("should_talk"):
-				if actor.get_value("open_mouth"):
-					if currently_speaking:
-						%Rotation.modulate.a = 1
-					else:
-						%Rotation.modulate.a = 0.2
-
-				elif !actor.get_value("open_mouth"):
-					if !currently_speaking:
-						%Rotation.modulate.a = 1
-					else:
-						%Rotation.modulate.a = 0.2
-			else:
-				%Rotation.show()
-				%Rotation.modulate.a = 1
-		1:
-			%Pos.modulate.a = 1
-			if actor.get_value("should_blink"):
-				if actor.get_value("open_eyes"):
-					if !blinking:
-						%Pos.show()
-					elif blinking:
-						%Pos.hide()
-
-				elif !actor.get_value("open_eyes"):
-					if blinking:
-						%Pos.show()
-					elif !blinking:
-						%Pos.hide()
-
-			%Rotation.modulate.a = 1
-			if actor.get_value("should_talk"):
-				if actor.get_value("open_mouth"):
-					if currently_speaking:
-						%Rotation.show()
-					else:
-						%Rotation.hide()
-
-				elif !actor.get_value("open_mouth"):
-					if !currently_speaking:
-						%Rotation.show()
-					else:
-						%Rotation.hide()
-			else:
-				%Rotation.show()
-				%Rotation.modulate.a = 1
 
 func editor_blink():
-	if Global.mode == 0:
+	if Global.mode == 1:
 		if actor.get_value("should_blink"):
 			%Pos.show()
 			if not actor.get_value("open_eyes"):
 				%Pos.modulate.a = 1
 				reset_animations()
 			else:
-				%Pos.modulate.a = 0.2
+				%Pos.modulate.a = 0
 		
 		%Blink.wait_time = 0.2 * Global.settings_dict.blink_speed
 		%Blink.start()
@@ -119,7 +86,7 @@ func editor_blink():
 		await  %Blink.timeout
 		if actor.get_value("should_blink"):
 			if not actor.get_value("open_eyes"):
-				%Pos.modulate.a = 0.2
+				%Pos.modulate.a = 0
 			else:
 				%Pos.modulate.a = 1
 				reset_animations()
@@ -128,22 +95,22 @@ func editor_blink():
 		blinking = false
 
 func blink():
-	if Global.mode != 0:
+	if Global.mode == 1:
 		if actor.get_value("should_blink"):
 			%Pos.modulate.a = 1
 			if not actor.get_value("open_eyes"):
 				%Pos.show()
 				reset_animations()
 			else:
-				%Pos.hide()
-		
+				%Pos.modulate.a = 0
+
 		%Blink.wait_time = 0.2 * Global.settings_dict.blink_speed
 		%Blink.start()
 		blinking = true
 		await  %Blink.timeout
 		if actor.get_value("should_blink"):
 			if not actor.get_value("open_eyes"):
-				%Pos.hide()
+				%Pos.modulate.a = 0
 			else:
 				%Pos.show()
 				reset_animations()
@@ -152,19 +119,19 @@ func blink():
 		blinking = false
 
 func speaking():
-	if Global.mode != 0:
+	if Global.mode == 1:
 		%Rotation.modulate.a = 1
 		if actor.get_value("should_talk"):
 			if actor.get_value("open_mouth"):
 				reset_animations()
 				%Rotation.show()
-					
+			
 			else:
 				%Rotation.hide()
 		else:
 			%Rotation.show()
-			
-	elif Global.mode == 0:
+
+	elif Global.mode == 1:
 		%Rotation.show()
 		if actor.get_value("should_talk"):
 			if actor.get_value("open_mouth"):
@@ -176,10 +143,10 @@ func speaking():
 			%Rotation.modulate.a = 1
 	currently_speaking = true
 
-func reset_animations(_place_holder : int = 0):
+func reset_animations(_place_holder: int = 0):
 	if actor.get_value("one_shot"):
 		reset_anim()
-	
+
 	if actor.get_value("should_reset"):
 		reset_anim()
 
@@ -193,7 +160,7 @@ func reset_anim():
 		actor.animation()
 
 func not_speaking():
-	if Global.mode != 0:
+	if Global.mode == 1:
 		%Rotation.modulate.a = 1
 		if actor.get_value("should_talk"):
 			if actor.get_value("open_mouth"):
@@ -203,8 +170,8 @@ func not_speaking():
 				%Rotation.show()
 		else:
 			%Rotation.show()
-			
-	elif Global.mode == 0:
+
+	elif Global.mode == 1:
 		%Rotation.show()
 		if actor.get_value("should_talk"):
 			if actor.get_value("open_mouth"):

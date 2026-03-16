@@ -21,7 +21,6 @@ func _on_delete_state_pressed():
 		
 		var state_btn  = get_tree().get_nodes_in_group("StateButtons")
 		
-		InputMap.erase_action(state_btn[Global.current_state].input_key)
 		
 		
 		state_btn[Global.current_state].queue_free()
@@ -140,7 +139,7 @@ func _on_state_remap_pressed() -> void:
 	%StateButtonHbox.get_node("StateRemapButton").update_key_text()
 	%StateRemapPopup.popup()
 
-func _on_state_remap_popup_close_requested() -> void:
+func _on_state_remap_popup_popup_hide():
 	%StateRemapPopup.hide()
 
 func _on_state_name_text_submitted(new_text: String) -> void:

@@ -15,10 +15,10 @@ var current_theme : Theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
 	save_on_exit = false,
 	fps = 24,
 	as_apng = false,
-	screen_size = Vector2(1152, 648),
+	screen_size = Vector2(800, 800),
 	screen_pos = Vector2i(DisplayServer.screen_get_size(0).x/2- get_window().size.x/2,DisplayServer.screen_get_size(0).y/2- get_window().size.y/2),
 	screen_window = 0,
-	mode = 0,
+	mode = 1,
 	borders = true,
 	
 	right = 2500,
@@ -42,6 +42,7 @@ var current_theme : Theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
 	hide_mini_view = true,
 	hide_sprite_view = true,
 	use_threading = false,
+	last_remix_path = "",
 }
 @onready var os_path = OS.get_executable_path().get_base_dir()
 
@@ -49,7 +50,7 @@ var additional_output = RefCounted.new()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		popup.popup_centered()
+		save_before_closing()
 
 func save_before_closing():
 	if theme_settings.save_on_exit:
@@ -58,8 +59,8 @@ func save_before_closing():
 		else:
 			DirAccess.make_dir_absolute(os_path + "/AutoSaves")
 			SaveAndLoad.save_file(OS.get_executable_path().get_base_dir() + "/AutoSaves" + "/" + str(randi()))
-		window_size_changed()
-		save()
+	window_size_changed()
+	save()
 	await get_tree().create_timer(0.1).timeout
 	get_tree().quit()
 
@@ -180,10 +181,7 @@ func window_size_changed():
 
 func check_ui():
 	if top_bar != null && is_instance_valid(top_bar):
-		if theme_settings.mode == 0:
-			top_bar.get_node("%TopBarInput").choosing_mode(0)
-		else:
-			top_bar.get_node("%TopBarInput").choosing_mode(1)
+		top_bar.get_node("%TopBarInput").choosing_mode(1)
 
 func loaded_UI(id):
 	_on_ui_theme_button_item_selected(id)

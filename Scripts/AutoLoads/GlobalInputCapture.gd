@@ -8,6 +8,20 @@ func _ready() -> void:
 
 func _on_background_input_capture_bg_key_pressed(_node, keys_pressed : Dictionary):
 	if Global.settings_dict.checkinput:
+		
+		var has_number_key = false
+		for i in keys_pressed:
+			if keys_pressed[i]:
+				var key_string = OS.get_keycode_string(i)
+				if key_string in ["4", "5", "6", "7", "8", "9", "0"]:
+					has_number_key = true
+					break
+
+		var ctrl_pressed = keys_pressed.get(KEY_CTRL, false)
+
+		if has_number_key and not ctrl_pressed:
+			return
+
 		var keyStrings = []
 		var costumeKeys = []
 		
@@ -51,12 +65,20 @@ func _on_background_input_capture_bg_key_pressed(_node, keys_pressed : Dictionar
 			e.shift_pressed = keys_pressed.get(KEY_SHIFT, false)
 			e.ctrl_pressed = keys_pressed.get(KEY_CTRL, false)
 			e.meta_pressed = keys_pressed.get(KEY_META, false)
+			
+			var matched_hotkey = ""
 			var i = costumeKeys.find(e.as_text())
+			
+			if i == -1 and ctrl_pressed and key in ["4", "5", "6", "7", "8", "9", "0"]:
+				i = costumeKeys.find(key)
+				if i != -1:
+					matched_hotkey = key
+			
 			if i >= 0:
-				if costumeKeys[i] not in keys:
-				#	print(keys)
-				#	print(costumeKeys[i])
-					Global.key_pressed.emit(costumeKeys[i])
-					keys.append(costumeKeys[i])
+				if matched_hotkey.is_empty():
+					matched_hotkey = costumeKeys[i]
+				if matched_hotkey not in keys:
+					Global.key_pressed.emit(matched_hotkey)
+					keys.append(matched_hotkey)
 	
 	keys = []

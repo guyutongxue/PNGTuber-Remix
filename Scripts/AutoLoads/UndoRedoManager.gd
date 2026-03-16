@@ -4,7 +4,7 @@ var undo_redo_data : Array = []
 var undo_redo_id : int = 0
 
 func _input(event: InputEvent) -> void:
-	if Global.mode == 0:
+	if Global.mode == 1:
 		if event.is_action_pressed("ui_undo"):
 			undo_info()
 		if event.is_action_pressed("ui_redo"):
@@ -22,6 +22,10 @@ func redo_info():
 	if undo_redo_data.size() > 0:
 		match_data_type(undo_redo_data[max(undo_redo_id - 1, 0)], "redo")
 
+func clear_undo():
+	undo_redo_data.clear()
+	undo_redo_id = 0
+
 func add_data_to_manager(data : Array):
 	if undo_redo_id != undo_redo_data.size():
 		undo_redo_data.resize(undo_redo_id)
@@ -38,6 +42,8 @@ func match_data_type(data, un_re):
 		pass
 
 func match_object_data_type(object, un_re):
+	if !object.has("sprite_object") || object.sprite_object == null || !is_instance_valid(object.sprite_object):
+		return
 	match object.data_type:
 		"sprite_data":
 			if un_re == "undo":

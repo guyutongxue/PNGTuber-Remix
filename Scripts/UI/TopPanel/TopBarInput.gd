@@ -110,19 +110,17 @@ func _input(event: InputEvent) -> void:
 
 func on_mode_changed(new_mode) -> void:
 	desel_everything()
-	match new_mode:
-		0:
-			%PreviewModeCheck.show()
-			%HideUIButton.button_pressed = true
-			%HideUIButton.show()
-		1:
-			%HideUIButton.hide()
-			%HideUIButton.button_pressed = false
-			%PreviewModeCheck.hide()
-			%PreviewModeCheck.button_pressed = false
+
+	if new_mode == 1:
+		%HideUIButton.hide()
+		%HideUIButton.button_pressed = false
+		%PreviewModeCheck.hide()
+		%PreviewModeCheck.button_pressed = false
 
 func choosing_mode(id):
-	Global.mode = id
+
+	if id == 1:
+		Global.mode = id
 
 func choosing_bg_color(id):
 	Global.settings_dict.is_transparent = false
