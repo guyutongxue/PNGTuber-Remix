@@ -46,6 +46,11 @@ func _ready():
 	Global.update_ui_pieces.connect(update_pieces)
 	update_pieces()
 	get_window().files_dropped.connect(file_dropped)
+	await get_tree().create_timer(0.2).timeout
+	var last_path = Settings.theme_settings.get("last_remix_path", "")
+	if last_path != "" and FileAccess.file_exists(last_path):
+		SaveAndLoad.load_file(last_path)
+		Global.mode = 1
 
 func file_dropped(files : PackedStringArray):
 	sprite_paths.clear()
@@ -146,7 +151,10 @@ func _on_file_dialog_file_selected(path):
 		State.LoadFile:
 			ImageTextureLoaderManager.trim = false
 			SaveAndLoad.import_trimmed = false
-			if path.get_extension().to_lower() == "save":
+			if path.get_extension() == "pngRemix" or path.get_extension() == "save":
+				Settings.theme_settings.last_remix_path = path
+				Settings.save()
+			if path.get_extension() == "save":
 				if Settings.theme_settings.enable_trimmer:
 					model_path = path
 					%ConfirmTrim.popup_centered()

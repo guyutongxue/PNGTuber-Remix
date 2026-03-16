@@ -144,6 +144,18 @@ var is_editor : bool = true:
 		is_editor = x
 		Settings.change_cursor()
 
+var transparent_mode_active: = false
+var previous_always_on_top: = false
+var previous_transparent: = false
+var previous_window_size: = Vector2(1280, 720)
+var previous_ui_visible: = true
+var previous_borderless: = false
+
+
+var dragging_window: = false
+var drag_offset: = Vector2i.ZERO
+var drag_smoothing_factor: = 0.8
+
 var image_data = ImageData.new()
 var image_data_normal = ImageData.new()
 var selected_mesh_inx : int = 1
@@ -248,7 +260,28 @@ func get_sprite_states(state):
 	update_layer_visib.emit()
 	update_anim.emit()
 
-func _input(_event : InputEvent):
+func _input(event):
+	if event.is_action_pressed("save"):
+		if save_path:
+			SaveAndLoad.save_file(save_path)
+		else:
+			main.save_as_file()
+	if event.is_action_pressed("desel"):
+
+		if held_sprite != null && is_instance_valid(held_sprite):
+			if held_sprite.has_node("%Origin"):
+				held_sprite.get_node("%Origin").hide()
+		held_sprite = null
+		deselect.emit()
+
+
+	if Input.is_action_just_pressed("toggle_transparent_mode"):
+		toggle_transparent_mode()
+
+
+	if transparent_mode_active:
+		handle_transparent_mode_scaling(event)
+		return
 	for i in held_sprites:
 		if i != null && is_instance_valid(i):
 			if Input.is_action_pressed("ctrl"):
@@ -342,10 +375,150 @@ func update_spins():
 			i.save_state(current_state)
 			update_pos_spins.emit()
 
-func _physics_process(_delta: float) -> void:
+func toggle_transparent_mode():
+	if !transparent_mode_active:
+
+		previous_always_on_top = get_window().always_on_top
+		previous_transparent = settings_dict.is_transparent
+		previous_window_size = get_window().size
+		previous_borderless = get_window().borderless
+
+
+		if top_ui != null && is_instance_valid(top_ui):
+			previous_ui_visible = top_ui.visible
+		else:
+			previous_ui_visible = true
+
+		get_window().min_size = Vector2i(0, 0)
+		get_window().always_on_top = true
+		settings_dict.is_transparent = true
+		get_viewport().transparent_bg = true
+		get_window().borderless = true
+
+
+		var tween = create_tween()
+		var current_size := Vector2(get_window().size)
+		var target_size := Vector2(150, 150)
+
+
+		tween.tween_method(
+			func(size): get_window().size = size, 
+			current_size, 
+			current_size * 1.1, 
+			0.1
+		)
+		tween.tween_method(
+			func(size): get_window().size = size, 
+			current_size * 1.1, 
+			target_size, 
+			0.2
+		)
+
+
+		initial_window_size = target_size
+
+
+		if top_ui != null && is_instance_valid(top_ui):
+			top_ui.hide()
+
+
+		if main != null && is_instance_valid(main):
+			if main.has_node("%Control"):
+				main.get_node("%Control").hide()
+
+		transparent_mode_active = true
+		print("透明模式已激活 - 置顶: true, 透明: true, 窗口大小", get_window().size, ", UI隐藏, 标题栏隐藏")
+	else:
+
+		get_window().min_size = Vector2(720,720)
+		get_window().always_on_top = previous_always_on_top
+		settings_dict.is_transparent = previous_transparent
+		get_viewport().transparent_bg = previous_transparent
+		get_window().borderless = previous_borderless
+
+
+		var tween = create_tween()
+		var current_size := Vector2(get_window().size)
+		var target_size := Vector2(previous_window_size)
+
+
+		tween.tween_method(
+			func(size): get_window().size = size, 
+			current_size, 
+			current_size * 0.9, 
+			0.1
+		)
+		tween.tween_method(
+			func(size): get_window().size = size, 
+			current_size, 
+			target_size, 
+			0.2
+		)
+
+
+		if top_ui != null && is_instance_valid(top_ui):
+			top_ui.visible = previous_ui_visible
+
+
+
+		if main != null && is_instance_valid(main):
+			if main.has_node("%Control"):
+				main.get_node("%Control").hide()
+
+		transparent_mode_active = false
+		print("透明模式已恢复 - 置顶: ", previous_always_on_top, " 透明: ", previous_transparent, " 窗口大小: ", previous_window_size, " 标题栏恢复")
+
+
+	Settings.theme_settings.always_on_top = get_window().always_on_top
+	Settings.save()
+
+
+var initial_window_size: = Vector2.ZERO
+
+func handle_transparent_mode_scaling(event: InputEvent):
+	if event is InputEventMouseButton and Input.is_action_pressed("ctrl"):
+		if event.button_index == 4:
+			var current_size = get_window().size
+			var scale_factor = 1.1
+			var new_size = current_size * scale_factor
+
+			if new_size.x <= 450 and new_size.y <= 450:
+				get_window().size = new_size
+
+		elif event.button_index == 5:
+			var current_size = get_window().size
+			var scale_factor = 0.9
+			var new_size = current_size * scale_factor
+
+			if new_size.x >= 75 and new_size.y >= 75:
+				get_window().size = new_size
+
+
+	elif event is InputEventMouseButton:
+		if event.button_index == 2:
+			if event.pressed:
+
+				dragging_window = true
+
+				drag_offset = DisplayServer.mouse_get_position() - get_window().position
+
+				if transparent_mode_active:
+					get_window().borderless = false
+			else:
+
+				dragging_window = false
+
+				if transparent_mode_active:
+					get_window().borderless = true
+
+
+func _physics_process(_delta: float) -> void :
 	mouse_delay()
 	if Input.is_action_just_pressed("debug_rep"):
 		print_orphan_nodes()
+	if dragging_window:
+		var target_position = Vector2(DisplayServer.mouse_get_position() - drag_offset)
+		get_window().position = Vector2i(target_position)
 
 func mouse_delay():
 	frame_counter += 1

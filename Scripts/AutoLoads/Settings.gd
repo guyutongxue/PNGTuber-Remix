@@ -61,6 +61,7 @@ const SAVED_LAYOUT_PATH := "user://layout.tres"
 	phys_jitter = 0.5,
 	dev_mode = false,
 	use_glob_input = false,
+	last_remix_path = "",
 }
 var save_location = ""
 var autosave_location = ""

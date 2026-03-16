@@ -386,6 +386,8 @@ func load_model(path: String) -> void:
 			
 
 	Global.main.get_node("%Marker").current_screen = Global.settings_dict.monitor
+	RenderingServer.set_default_clear_color(Global.settings_dict.bg_color)
+	get_viewport().transparent_bg = Global.settings_dict.is_transparent
 	Global.project_updates.emit("Project Loaded!")
 	Global.remake_image_manager.emit()
 	Global.load_model.emit()

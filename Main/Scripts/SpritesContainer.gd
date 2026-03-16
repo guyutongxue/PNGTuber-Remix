@@ -9,7 +9,7 @@ var current_mc_anim = "Idle"
 var current_mo_anim = "Idle"
 var should_squish : bool = false
 var squish_amount : float = 1.0
-var bounce_state : bool = false
+var bounce_state : bool = true
 var dim_color : Color = Color.WHITE
 
 var prev : int = 0
