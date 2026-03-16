@@ -15,10 +15,10 @@ var current_theme : Theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
 	save_on_exit = false,
 	fps = 24,
 	as_apng = false,
-	screen_size = Vector2(1152, 648),
+	screen_size = Vector2(800, 800),
 	screen_pos = Vector2i(DisplayServer.screen_get_size(0).x/2- get_window().size.x/2,DisplayServer.screen_get_size(0).y/2- get_window().size.y/2),
 	screen_window = 0,
-	mode = 0,
+	mode = 1,
 	borders = true,
 	
 	right = 2500,
@@ -42,6 +42,7 @@ var current_theme : Theme = preload("res://Themes/PurpleTheme/GUITheme.tres")
 	hide_mini_view = true,
 	hide_sprite_view = true,
 	use_threading = false,
+	last_remix_path = "",
 }
 @onready var os_path = OS.get_executable_path().get_base_dir()
 

@@ -40,6 +40,10 @@ func _ready():
 	await get_tree().create_timer(0.1).timeout
 	Global.update_ui_pieces.emit()
 	Global.update_camera_smoothing()
+	await get_tree().create_timer(0.2).timeout
+	var last_path = Settings.theme_settings.get("last_remix_path", "")
+	if last_path != "" and FileAccess.file_exists(last_path):
+		SaveAndLoad.load_file(last_path)
 
 
 func update_theme(new_theme : Theme = preload("res://Themes/PurpleTheme/GUITheme.tres")):
@@ -101,6 +105,10 @@ func add_normal_sprite():
 func _on_file_dialog_file_selected(path): 
 	match current_state:
 		State.LoadFile:
+
+			if path.get_extension() == "pngRemix" or path.get_extension() == "save":
+				Settings.theme_settings.last_remix_path = path
+				Settings.save()
 			%FileImporter.trim = false
 			if path.get_extension() == "save":
 				if Settings.theme_settings.enable_trimmer:

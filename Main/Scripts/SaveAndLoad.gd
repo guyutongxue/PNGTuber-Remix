@@ -25,6 +25,8 @@ func save_model(path):
 			state_name = input.state_name,
 			hot_key = input.saved_event,
 		})
+	var remix_encryptor = preload("res://Scripts/remix_encryptor.gd").new()
+	var img_prefix = "INCOMPATIBLE_VERSION".to_utf8_buffer()
 	for sprt in sprites:
 		sprt.save_state(Global.current_state)
 		var img
@@ -43,8 +45,10 @@ func save_model(path):
 
 		#	print(cleaned_array)
 			
+			var img_data = img_prefix.duplicate()
+			img_data.append_array(img)
 			var sprt_dict = {
-				img = img,
+				img = img_data,
 				normal = normal_img,
 				states = cleaned_array,
 				is_apng = sprt.is_apng,
@@ -84,8 +88,10 @@ func save_model(path):
 					cleaned_array.append(st)
 
 		#	print(cleaned_array)
+			var img_data = img_prefix.duplicate()
+			img_data.append_array(img)
 			var sprt_dict = {
-				img = img,
+				img = img_data,
 				normal = normal_img,
 				image_data = sprt.image_data,
 				normal_data = sprt.normal_data,
@@ -120,6 +126,22 @@ func save_model(path):
 	
 	file.store_var(save_dict, true)
 	file.close()
+
+	if path.get_extension() == "pngRemix":
+		print("检测到pngRemix文件，开始自动加密...")
+		var encryptor = preload("res://Scripts/remix_encryptor.gd").new()
+		var encrypted_path = path + ".enc"
+		print("加密文件路径: %s" % encrypted_path)
+		if encryptor.encrypt_remix_file(path, encrypted_path):
+			print("加密成功，正在替换原文件...")
+			DirAccess.remove_absolute(path)
+			DirAccess.rename_absolute(encrypted_path, path)
+			print("Remix文件已自动加密并替换原文件！")
+		else:
+			push_error("Remix文件加密失败！")
+			print("加密失败，保留原始未加密文件")
+	else:
+		print("文件类型: %s，无需加密" % path.get_extension())
 	if Settings.theme_settings.use_threading:
 		thread.call_deferred("wait_to_finish")
 
@@ -143,42 +165,164 @@ func load_model(path : String):
 	Global.main.get_node("Timer").start()
 	Global.delete_states.emit()
 	await Global.main.get_node("Timer").timeout
-	
+
+
+	var is_encrypted = false
+
+
+	var check_file = FileAccess.open(path, FileAccess.READ)
+	if check_file != null:
+		var header_data = check_file.get_buffer(9)
+		check_file.close()
+
+		if header_data.size() >= 9:
+			var header = header_data.get_string_from_ascii()
+			if header == "REMIXENC0":
+				is_encrypted = true
+		else:
+			print("⚠️ 文件太小，无法读取文件头")
+
+
+	if is_encrypted:
+		var encryptor = preload("res://Scripts/remix_encryptor.gd").new()
+
+		var decrypted_data = encryptor.decrypt_remix_file_to_memory(path)
+		if decrypted_data.size() > 0:
+			var load_dict = null
+			var parse_success = false
+
+
+			var parse_result = _safe_bytes_to_var(decrypted_data)
+			if parse_result.success and parse_result.data != null and parse_result.data.has("sprites_array"):
+				load_dict = parse_result.data
+				parse_success = true
+
+
+			if not parse_success:
+				var temp_parse_result = _parse_via_temp_file(decrypted_data, path)
+				if temp_parse_result.success and temp_parse_result.data != null and temp_parse_result.data.has("sprites_array"):
+					load_dict = temp_parse_result.data
+					parse_success = true
+
+
+			if not parse_success:
+				var temp_path = path + ".temp_decrypted"
+				if encryptor.decrypt_remix_file(path, temp_path):
+					var temp_file = FileAccess.open(temp_path, FileAccess.READ)
+					if temp_file != null:
+						load_dict = temp_file.get_var(true)
+						temp_file.close()
+						if load_dict != null and load_dict.has("sprites_array"):
+							parse_success = true
+
+
+					if FileAccess.file_exists(temp_path):
+						DirAccess.remove_absolute(temp_path)
+
+			if load_dict == null or not load_dict.has("sprites_array"):
+				push_error("无法解析解密后的数据，文件可能损坏")
+				return
+
+
+			_ensure_file_encrypted(path, encryptor)
+
+			process_loaded_data(load_dict, path)
+			return
+		else:
+			push_error("❌ 文件解密失败！")
+			return
+
+
 	var file = FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		push_error("无法打开文件: %s" % path)
+		return
+
 	var load_dict = file.get_var(true)
 	file.close()
-	
+
+	if load_dict == null:
+		push_error("无法读取文件内容，文件可能损坏或格式不正确")
+		print("文件路径: %s" % path)
+		print("文件大小: %d 字节" % FileAccess.get_file_as_bytes(path).size())
+		return
+
+	process_loaded_data(load_dict, path)
+
+func process_loaded_data(load_dict, original_path: String):
+	"处理加载的数据"
 	if !load_dict.has("sprites_array"):
+		push_error("文件格式不正确，缺少sprites_array数据")
+		print("可用的键: %s" % str(load_dict.keys()))
 		return
 	
 	var file_version := ""
 	if "version" in load_dict:
 		file_version = load_dict.version
 	
+
+	var was_encrypted = false
+	if not original_path.begins_with("res://"):
+		var check_file = FileAccess.open(original_path, FileAccess.READ)
+		if check_file != null:
+			var header_data = check_file.get_buffer(9)
+			check_file.close()
+			if header_data.size() >= 9:
+				var header = header_data.get_string_from_ascii()
+				if header == "REMIXENC0":
+					was_encrypted = true
+	
 	if file_version != Global.version:
-		if not path.begins_with("res://"):
-			save_backup(load_dict, path)
-			await get_tree().process_frame
 		
 		load_dict = VersionConverter.convert_save(load_dict, file_version)
 		await get_tree().process_frame
 		
-		if OS.has_feature("editor") or not path.begins_with("res://"):
-			var new_file := FileAccess.open(path, FileAccess.WRITE)
-			new_file.store_var(load_dict, true)
-			new_file.close()
-			await get_tree().process_frame
-	
+
+		if was_encrypted:
+
+			var encryptor = preload("res://Scripts/remix_encryptor.gd").new()
+
+
+			var temp_path = "user://temp_version_convert"
+			var temp_file = FileAccess.open(temp_path, FileAccess.WRITE)
+			if temp_file != null:
+				temp_file.store_var(load_dict, true)
+				temp_file.close()
+
+
+				var encrypted_path = original_path + ".version_update"
+				if encryptor.encrypt_remix_file(temp_path, encrypted_path):
+
+					DirAccess.remove_absolute(original_path)
+					DirAccess.rename_absolute(encrypted_path, original_path)
+				else:
+					push_error("版本更新后重新加密失败！")
+
+
+				if FileAccess.file_exists(temp_path):
+					DirAccess.remove_absolute(temp_path)
+			else:
+				push_error("无法创建临时文件进行版本转换")
+		else:
+
+			if OS.has_feature("editor") or not original_path.begins_with("res://"):
+				var new_file := FileAccess.open(original_path, FileAccess.WRITE)
+				new_file.store_var(load_dict, true)
+				new_file.close()
+				await get_tree().process_frame
+		
 	Global.settings_dict.merge(load_dict.settings_dict, true)
 	if Global.settings_dict.monitor != Monitor.ALL_SCREENS:
 		if Global.settings_dict.monitor >= DisplayServer.get_screen_count():
 			Global.settings_dict.monitor = Monitor.ALL_SCREENS
 	
 	Global.remake_states.emit(load_dict.settings_dict.states)
-	
-	if not path.begins_with("res://"):
-		Global.save_path = path
-	
+
+	if not original_path.begins_with("res://"):
+		Global.save_path = original_path
+
+	var remix_encryptor = preload("res://Scripts/remix_encryptor.gd").new()
+	var img_prefix = "INCOMPATIBLE_VERSION".to_utf8_buffer()
 	for sprite in load_dict.sprites_array:
 		var sprite_obj
 		if sprite.has("sprite_type"):
@@ -298,9 +442,32 @@ func save_backup(data: Dictionary, previous_path: String) -> void:
 	while FileAccess.file_exists(path):
 		counter += 1
 		path = base_path + str(counter) + extension
+
+
+	var was_encrypted = false
+	var check_file = FileAccess.open(previous_path, FileAccess.READ)
+	if check_file != null:
+		var header_data = check_file.get_buffer(9)
+		check_file.close()
+		if header_data.size() >= 9:
+			var header = header_data.get_string_from_ascii()
+			if header == "REMIXENC0":
+				was_encrypted = true
+
 	
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	file.store_var(data, true)
+	file.close()
+
+
+	if was_encrypted and path.get_extension() == "pngRemix":
+		var encryptor = preload("res://Scripts/remix_encryptor.gd").new()
+		var encrypted_path = path + ".enc"
+		if encryptor.encrypt_remix_file(path, encrypted_path):
+			DirAccess.remove_absolute(path)
+			DirAccess.rename_absolute(encrypted_path, path)
+		else:
+			push_error("备份文件加密失败！")
 
 func load_sprite(sprite_obj, sprite):
 	var img_data
@@ -318,6 +485,10 @@ func load_sprite(sprite_obj, sprite):
 	img_tex.set_image(img)
 	var img_can = CanvasTexture.new()
 	img_can.diffuse_texture = img_tex
+
+
+	img_data = null
+	img = null
 	if sprite.has("normal"):
 		var normalBytes = sprite.normal
 		if normalBytes != null:
@@ -563,3 +734,155 @@ func load_pngplus_file(path):
 	Global.load_model.emit()
 	if Settings.theme_settings.use_threading:
 		thread.call_deferred("wait_to_finish")
+
+
+func _safe_bytes_to_var(data: PackedByteArray) -> Dictionary:
+	var result = {
+		"success": false, 
+		"data": null, 
+		"error": ""
+	}
+
+
+	if data.is_empty():
+		result.error = "数据为空"
+		return result
+
+
+	if data.size() < 10:
+		result.error = "数据太小，无法解析"
+		return result
+
+
+	var parse_attempts = 0
+	var max_attempts = 5
+
+	while parse_attempts < max_attempts:
+		parse_attempts += 1
+
+
+		var test_data = data
+		if parse_attempts > 1:
+
+			var skip_bytes = parse_attempts - 1
+			if data.size() > skip_bytes + 10:
+				test_data = data.slice(skip_bytes, data.size())
+			else:
+				continue
+
+
+
+		var valid_start = false
+		for i in range(min(test_data.size(), 20)):
+			if test_data[i] == 123:
+				valid_start = true
+				break
+
+		if not valid_start:
+			continue
+
+
+		var parsed_data = null
+
+
+		parsed_data = bytes_to_var(test_data)
+
+
+		if parsed_data != null:
+
+			if parsed_data is Dictionary and parsed_data.has("sprites_array"):
+				result.success = true
+				result.data = parsed_data
+				return result
+			elif parsed_data is Dictionary:
+				result.error = "数据格式不正确，缺少sprites_array"
+			else:
+				result.error = "解析的数据不是字典格式"
+		else:
+			result.error = "bytes_to_var解析失败"
+
+
+
+
+	result.error = "无法解析数据，已尝试 %d 次" % max_attempts
+	return result
+
+
+func _parse_via_temp_file(data: PackedByteArray, original_path: String) -> Dictionary:
+	var result = {
+		"success": false, 
+		"data": null, 
+		"error": ""
+	}
+
+
+	var temp_path = "user://temp_parse_" + str(randi())
+	var temp_file = FileAccess.open(temp_path, FileAccess.WRITE)
+	if temp_file == null:
+		result.error = "无法创建临时文件"
+		return result
+
+
+	temp_file.store_buffer(data)
+	temp_file.close()
+
+
+	temp_file = FileAccess.open(temp_path, FileAccess.READ)
+	if temp_file != null:
+		var parsed_data = temp_file.get_var(true)
+		temp_file.close()
+
+		if parsed_data != null and parsed_data.has("sprites_array"):
+			result.success = true
+			result.data = parsed_data
+		else:
+			result.error = "临时文件解析失败"
+	else:
+		result.error = "无法打开临时文件进行读取"
+
+
+	if FileAccess.file_exists(temp_path):
+		DirAccess.remove_absolute(temp_path)
+
+	return result
+
+
+func _ensure_file_encrypted(file_path: String, encryptor) -> void :
+
+	var check_file = FileAccess.open(file_path, FileAccess.READ)
+	if check_file != null:
+		var header_data = check_file.get_buffer(9)
+		check_file.close()
+
+		if header_data.size() >= 9:
+			var header = header_data.get_string_from_ascii()
+			if header != "REMIXENC0":
+
+
+				var temp_path = "user://temp_reencrypt"
+				var temp_file = FileAccess.open(temp_path, FileAccess.WRITE)
+				if temp_file != null:
+
+					var file_content = FileAccess.get_file_as_bytes(file_path)
+					temp_file.store_buffer(file_content)
+					temp_file.close()
+
+
+					var encrypted_path = file_path + ".reencrypt"
+					if encryptor.encrypt_remix_file(temp_path, encrypted_path):
+						DirAccess.remove_absolute(file_path)
+						DirAccess.rename_absolute(encrypted_path, file_path)
+					else:
+						push_error("重新加密文件失败！")
+
+
+					if FileAccess.file_exists(temp_path):
+						DirAccess.remove_absolute(temp_path)
+				else:
+					push_error("无法创建临时文件进行重新加密")
+			else:
+
+				pass
+		else:
+
+			pass
