@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cwtfmnxmnl7h3"]
 
-[ext_resource type="PackedScene" uid="uid://bfys3e12aapdo" path="res://UI/EditorUI/RightUI/Components/MiniComponents/light_settings_panel.tscn" id="2_j3n53"]
+[ext_resource type="PackedScene" uid="uid://bfys3e12aapdo" path="res://UI/EditorUI/RightUI/Components/MiniComponents/light_settings_panel.tscn" id="1"]
 
 [node name="Light" type="Control"]
 layout_mode = 3
@@ -36,5 +36,5 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="LightSettingsPanel" parent="ScrollContainer5/MarginContainer/VBoxContainer" instance=ExtResource("2_j3n53")]
+[node name="LightSettingsPanel" parent="ScrollContainer5/MarginContainer/VBoxContainer" instance=ExtResource("1")]
 layout_mode = 2

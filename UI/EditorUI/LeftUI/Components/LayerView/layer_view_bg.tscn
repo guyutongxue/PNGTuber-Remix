@@ -1,19 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://mldwqrl5tu11"]
 
-[ext_resource type="Script" uid="uid://kxhu61la7eav" path="res://UI/EditorUI/LeftUI/Components/LayerView/Scripts/layer_view_bg.gd" id="1_bam6n"]
+[ext_resource type="Script" uid="uid://kxhu61la7eav" path="res://UI/EditorUI/LeftUI/Components/LayerView/Scripts/layer_view_bg.gd" id="1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_htsfg"]
 
 [node name="LayerViewBG" type="PanelContainer"]
 clip_contents = true
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_htsfg")
-script = ExtResource("1_bam6n")
+script = ExtResource("1")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2

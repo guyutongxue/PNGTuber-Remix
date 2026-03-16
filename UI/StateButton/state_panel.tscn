@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bk2xbsvlmq0or"]
 
-[ext_resource type="Script" uid="uid://bjehgsjwju532" path="res://Scripts/UI/States/StatesStuff.gd" id="1_j5jjx"]
-[ext_resource type="PackedScene" uid="uid://drok2umdmycjc" path="res://UI/StateButton/state_remap_button.tscn" id="2_dfbov"]
+[ext_resource type="Script" uid="uid://bjehgsjwju532" path="res://Scripts/UI/States/StatesStuff.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://drok2umdmycjc" path="res://UI/StateButton/state_remap_button.tscn" id="2"]
 
 [node name="StatePanel" type="VBoxContainer"]
 custom_minimum_size = Vector2(350, 107)
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -16,7 +15,7 @@ size_flags_stretch_ratio = 20.0
 theme_override_constants/separation = 0
 
 [node name="StatesStuff" type="Node" parent="."]
-script = ExtResource("1_j5jjx")
+script = ExtResource("1")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -27,39 +26,39 @@ visible = false
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Add new State."
+tooltip_text = "添加新状态。"
 focus_mode = 0
 theme_override_font_sizes/font_size = 14
-text = "Add"
+text = "添加"
 
 [node name="DuplicateState" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Duplicate State."
+tooltip_text = "复制状态。"
 focus_mode = 0
 theme_override_font_sizes/font_size = 14
-text = "Add"
+text = "添加"
 metadata/_edit_use_anchors_ = true
 
 [node name="StateRemap" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Remap State HotKeys"
+tooltip_text = "重新映射状态热键"
 focus_mode = 0
 theme_override_font_sizes/font_size = 14
-text = "Remap"
+text = "重新映射"
 metadata/_edit_use_anchors_ = true
 
 [node name="DeleteState" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Delete State."
+tooltip_text = "删除状态。"
 focus_mode = 0
 theme_override_font_sizes/font_size = 14
-text = "Delete"
+text = "删除"
 metadata/_edit_use_anchors_ = true
 
 [node name="HSeparator" type="HSeparator" parent="."]
@@ -121,9 +120,28 @@ unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="StateButtonHbox" parent="StateRemapPopup/Margin/Panel/VBox" instance=ExtResource("2_dfbov")]
+[node name="StateButtonHbox" parent="StateRemapPopup/Margin/Panel/VBox" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="StateRemapPanel" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StateRemapPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="StateRemapPanel/VBoxContainer"]
+layout_mode = 2
+text = "状态重新映射"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="HBoxContainer/AddState" to="StatesStuff" method="_on_add_state_pressed"]
 [connection signal="pressed" from="HBoxContainer/DuplicateState" to="StatesStuff" method="_on_duplicate_state_pressed"]

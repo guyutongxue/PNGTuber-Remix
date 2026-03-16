@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://w2l13b1625f6"]
 
-[ext_resource type="Script" uid="uid://73xnoo570ynw" path="res://Scripts/UI/RightPanel/animation_tab.gd" id="1_e52ib"]
-[ext_resource type="PackedScene" uid="uid://qjip1w7hh1ss" path="res://UI/EditorUI/LeftUI/Components/AnimationPanel.tscn" id="2_kcx3q"]
-[ext_resource type="Script" uid="uid://dy1cd6xda1pu5" path="res://UI/BetterSlider/BetterToggles.gd" id="4_ryas8"]
+[ext_resource type="Script" uid="uid://73xnoo570ynw" path="res://Scripts/UI/RightPanel/animation_tab.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://qjip1w7hh1ss" path="res://UI/EditorUI/LeftUI/Components/AnimationPanel.tscn" id="2"]
+[ext_resource type="Script" uid="uid://dy1cd6xda1pu5" path="res://UI/BetterSlider/BetterToggles.gd" id="3"]
 
 [node name="AnimationTab" type="Control"]
 layout_mode = 3
@@ -13,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_e52ib")
+script = ExtResource("1")
 metadata/_tab_index = 0
 
 [node name="Scroll" type="ScrollContainer" parent="."]
@@ -49,7 +49,7 @@ text = "Animation"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CurrentSelVbox" parent="Scroll/MarginContainer/VBoxContainer" instance=ExtResource("2_kcx3q")]
+[node name="CurrentSelVbox" parent="Scroll/MarginContainer/VBoxContainer" instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
@@ -114,7 +114,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Rainbow"
-script = ExtResource("4_ryas8")
+script = ExtResource("3")
 sp_type = ""
 value_to_update = "rainbow"
 
@@ -124,7 +124,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 16
 text = "Self-Rainbow"
-script = ExtResource("4_ryas8")
+script = ExtResource("3")
 sp_type = ""
 value_to_update = "rainbow_self"
 
@@ -145,7 +145,7 @@ size_flags_vertical = 1
 min_value = -0.5
 max_value = 0.5
 step = 0.001
-value = 0.001
+value = 0.0010000000000000009
 
 [connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/GridContainer/AnimationReset" to="." method="_on_animation_reset_toggled"]
 [connection signal="toggled" from="Scroll/MarginContainer/VBoxContainer/GridContainer/AnimationOneShot" to="." method="_on_animation_one_shot_toggled"]

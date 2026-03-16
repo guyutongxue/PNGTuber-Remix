@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckidjwx5bqwbj"]
 
-[ext_resource type="Script" uid="uid://bsg261xpkttel" path="res://Scripts/UI/RightPanel/model_effects.gd" id="1_1lmbe"]
+[ext_resource type="Script" uid="uid://bsg261xpkttel" path="res://Scripts/UI/RightPanel/model_effects.gd" id="1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1lmbe"]
 
 [node name="ModelEffects" type="VBoxContainer"]
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -13,7 +12,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 8
-script = ExtResource("1_1lmbe")
+script = ExtResource("1")
 
 [node name="Label" type="Label" parent="."]
 custom_minimum_size = Vector2(0, 25)
@@ -102,6 +101,7 @@ current_tab = 0
 tabs_visible = false
 
 [node name="Grid2" type="GridContainer" parent="PanelContainer/Margin/TabContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/v_separation = 8
 columns = 2

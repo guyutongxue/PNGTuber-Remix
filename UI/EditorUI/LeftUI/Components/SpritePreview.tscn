@@ -1,10 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://g6paooy6tpxy"]
 
-[ext_resource type="Script" uid="uid://crajmo75eduvg" path="res://Scripts/UI/LeftPanel/sprite_preview.gd" id="1_3a5ns"]
+[ext_resource type="Script" uid="uid://crajmo75eduvg" path="res://Scripts/UI/LeftPanel/sprite_preview.gd" id="1"]
 
 [node name="BG" type="Panel"]
 custom_minimum_size = Vector2(0, 150)
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -32,7 +31,7 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 12
 alignment = 1
-script = ExtResource("1_3a5ns")
+script = ExtResource("1")
 
 [node name="Preview" type="PanelContainer" parent="MarginContainer/VBoxContainer/SpritePreview"]
 unique_name_in_owner = true

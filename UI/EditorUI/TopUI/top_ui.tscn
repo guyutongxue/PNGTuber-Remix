@@ -1,16 +1,16 @@
 [gd_scene load_steps=12 format=3 uid="uid://bpmlfhv30o08l"]
 
-[ext_resource type="Script" uid="uid://buog53mcsao0g" path="res://Scripts/UI/TopPanel/top_ui.gd" id="2_fpnkx"]
-[ext_resource type="Script" uid="uid://bafvsv0wf438w" path="res://Scripts/Misc/OnlineLinks.gd" id="3_tep3f"]
-[ext_resource type="Script" uid="uid://qy3riyrj7tll" path="res://Scripts/UI/TopPanel/TopBarInput.gd" id="4_r6evh"]
-[ext_resource type="Texture2D" uid="uid://bq4tg8ia2crwh" path="res://UI/Assets/LinksButtonImages/GithubLogo.png" id="6_0f73e"]
-[ext_resource type="Texture2D" uid="uid://whhnbdvw3i1j" path="res://UI/Assets/LinksButtonImages/TumblrLogo.png" id="7_ja8k8"]
-[ext_resource type="Texture2D" uid="uid://kmyr2ks7oil4" path="res://UI/Assets/LinksButtonImages/RedditLogo.png" id="8_3p41m"]
-[ext_resource type="Texture2D" uid="uid://dt530lalergk0" path="res://DemoModels/Icons/BasicIcon.png" id="9_hrvuv"]
-[ext_resource type="Texture2D" uid="uid://bhidrbb01hfmq" path="res://DemoModels/Icons/BGIcon.png" id="10_apeyf"]
-[ext_resource type="Texture2D" uid="uid://fmhwpxa4hlo7" path="res://DemoModels/Icons/NormalIcon.png" id="11_bgxcq"]
-[ext_resource type="Texture2D" uid="uid://bjxmdyue5pp2x" path="res://DemoModels/Icons/FollowMouseIcon.png" id="12_bmktp"]
-[ext_resource type="Texture2D" uid="uid://dm7ppdlhye1ji" path="res://DemoModels/Icons/AssetIcon.png" id="13_f2y74"]
+[ext_resource type="Script" uid="uid://buog53mcsao0g" path="res://Scripts/UI/TopPanel/top_ui.gd" id="1"]
+[ext_resource type="Script" uid="uid://bafvsv0wf438w" path="res://Scripts/Misc/OnlineLinks.gd" id="2"]
+[ext_resource type="Script" uid="uid://qy3riyrj7tll" path="res://Scripts/UI/TopPanel/TopBarInput.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://bq4tg8ia2crwh" path="res://UI/Assets/LinksButtonImages/GithubLogo.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://whhnbdvw3i1j" path="res://UI/Assets/LinksButtonImages/TumblrLogo.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://kmyr2ks7oil4" path="res://UI/Assets/LinksButtonImages/RedditLogo.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dt530lalergk0" path="res://DemoModels/Icons/BasicIcon.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bhidrbb01hfmq" path="res://DemoModels/Icons/BGIcon.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://fmhwpxa4hlo7" path="res://DemoModels/Icons/NormalIcon.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://bjxmdyue5pp2x" path="res://DemoModels/Icons/FollowMouseIcon.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://dm7ppdlhye1ji" path="res://DemoModels/Icons/AssetIcon.png" id="11"]
 
 [node name="TopUI" type="Control"]
 custom_minimum_size = Vector2(0, 35)
@@ -21,14 +21,14 @@ grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-script = ExtResource("2_fpnkx")
+script = ExtResource("1")
 
 [node name="OnlineLinks" type="Node" parent="."]
-script = ExtResource("3_tep3f")
+script = ExtResource("2")
 
 [node name="TopBarInput" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("4_r6evh")
+script = ExtResource("3")
 
 [node name="TopBar" type="Panel" parent="."]
 unique_name_in_owner = true
@@ -54,61 +54,41 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
-text = "   Files "
-item_count = 10
-popup/item_0/text = "New"
-popup/item_0/id = 0
-popup/item_1/text = "Open"
-popup/item_1/id = 1
-popup/item_2/text = "Save"
-popup/item_2/id = 8
-popup/item_3/text = "Save As"
-popup/item_3/id = 3
-popup/item_4/text = "Add Images"
-popup/item_4/id = 4
-popup/item_5/text = "Add Appendage Based Image"
-popup/item_5/id = 6
-popup/item_6/text = "Export Model Parts"
-popup/item_6/id = 9
-popup/item_7/text = "Demo Model"
-popup/item_7/id = 5
-popup/item_8/text = "LipSync Configuration"
-popup/item_8/id = 10
-popup/item_9/text = "Switch Session"
-popup/item_9/id = 11
+text = "   文件   "
+item_count = 1
+popup/item_0/text = "打开"
+popup/item_0/id = 1
 
 [node name="ModeButton" type="MenuButton" parent="TopBar/HBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
-text = " Mode "
-item_count = 2
-popup/item_0/text = "Editor"
-popup/item_0/id = 0
-popup/item_1/text = "Preview"
-popup/item_1/id = 1
+text = " 模式 "
+item_count = 1
+popup/item_0/text = "预览"
+popup/item_0/id = 1
 
 [node name="BGButton" type="MenuButton" parent="TopBar/HBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
-text = " BG Color "
+text = " 背景颜色 "
 item_count = 7
-popup/item_0/text = "Red"
+popup/item_0/text = "红色"
 popup/item_0/id = 0
-popup/item_1/text = "Blue"
+popup/item_1/text = "蓝色"
 popup/item_1/id = 1
-popup/item_2/text = "Green"
+popup/item_2/text = "绿色"
 popup/item_2/id = 2
-popup/item_3/text = "Magenta"
+popup/item_3/text = "洋红色"
 popup/item_3/id = 3
-popup/item_4/text = "Transparent"
+popup/item_4/text = "透明"
 popup/item_4/id = 4
-popup/item_5/text = "Gray"
+popup/item_5/text = "灰色"
 popup/item_5/id = 5
-popup/item_6/text = "Custom"
+popup/item_6/text = "自定义"
 popup/item_6/id = 6
 
 [node name="BounceControlButton" type="MenuButton" parent="TopBar/HBox"]
@@ -117,14 +97,14 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
-text = " Bounce "
+text = " 弹跳 "
 
 [node name="InputsButton" type="MenuButton" parent="TopBar/HBox"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
-text = " Settings "
+text = " 设置 "
 
 [node name="CollabButton" type="MenuButton" parent="TopBar/HBox"]
 unique_name_in_owner = true
@@ -133,7 +113,7 @@ custom_minimum_size = Vector2(79, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 15
-text = "Collab
+text = "协作
 "
 
 [node name="WindowButton" type="MenuButton" parent="TopBar/HBox"]
@@ -141,24 +121,24 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
-text = " Window "
+text = " 窗口 "
 item_count = 7
-popup/item_0/text = "Toggle Borders"
+popup/item_0/text = "切换边框"
 popup/item_0/id = 0
-popup/item_1/text = "Save Window (position, size, etc..)"
+popup/item_1/text = "保存窗口（位置、大小等）"
 popup/item_1/id = 1
-popup/item_2/text = "Always on top"
+popup/item_2/text = "总是置顶"
 popup/item_2/checkable = 1
 popup/item_2/id = 2
-popup/item_3/text = "Center Window"
+popup/item_3/text = "居中窗口"
 popup/item_3/id = 3
-popup/item_4/text = "Add Window"
+popup/item_4/text = "添加窗口"
 popup/item_4/id = 4
-popup/item_5/text = "Hide Mini-View"
+popup/item_5/text = "隐藏迷你视图"
 popup/item_5/checkable = 1
 popup/item_5/checked = true
 popup/item_5/id = 5
-popup/item_6/text = "Hide Sprite-View"
+popup/item_6/text = "隐藏精灵视图"
 popup/item_6/checkable = 1
 popup/item_6/checked = true
 popup/item_6/id = 6
@@ -168,13 +148,13 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 16
-text = " About "
+text = " 关于 "
 item_count = 3
-popup/item_0/text = "Credits"
+popup/item_0/text = "致谢"
 popup/item_0/id = 0
-popup/item_1/text = "About"
+popup/item_1/text = "关于"
 popup/item_1/id = 1
-popup/item_2/text = "Mini Tutorial (Wip)"
+popup/item_2/text = "迷你教程（开发中）"
 popup/item_2/id = 2
 
 [node name="PreviewModeCheck" type="CheckBox" parent="TopBar/HBox"]
@@ -182,21 +162,21 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(79, 0)
 layout_mode = 2
 size_flags_vertical = 4
-tooltip_text = "Turns your model Static.
-Uncheck to preview your model's movement. 
-This automatically gets unchecked when changing modes.
+tooltip_text = "使你的模型静态化。
+取消勾选以预览模型的移动。
+切换模式时会自动取消勾选。
 "
-theme_override_font_sizes/font_size = 14
-text = "Pause Movement   "
+text = "暂停移动   "
 flat = true
 
 [node name="HideUIButton" type="CheckBox" parent="TopBar/HBox"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(79, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
 button_pressed = true
-text = "Show UI"
+text = "显示界面"
 flat = true
 
 [node name="DeselectButton" type="Button" parent="TopBar/HBox"]
@@ -210,7 +190,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 14
-text = "Deselect"
+text = "取消选择"
 flat = true
 icon_alignment = 1
 
@@ -221,7 +201,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 11
-text = "Window Size (0,0)"
+text = "窗口大小 (0,0)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -236,13 +216,13 @@ wrap_controls = false
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 396.0
-offset_bottom = 525.0
+offset_bottom = 707.0
 
 [node name="CreditLabel" type="Label" parent="AboutPopUp/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "PNGTuber Remix by TheMime (MudkipWorld)
-Original PNGTuber+ Code by kaiakairos. Better UI by LeoRson.
+原始PNGTuber+代码由kaiakairos提供。更好的UI由LeoRson提供。
 
 V1.3.4"
 horizontal_alignment = 1
@@ -254,15 +234,15 @@ columns = 3
 
 [node name="SourceLabel" type="Label" parent="AboutPopUp/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Source code : "
+text = "源代码："
 
 [node name="GitHubButton" type="TextureButton" parent="AboutPopUp/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture_normal = ExtResource("6_0f73e")
-texture_pressed = ExtResource("6_0f73e")
-texture_hover = ExtResource("6_0f73e")
-texture_disabled = ExtResource("6_0f73e")
+texture_normal = ExtResource("4")
+texture_pressed = ExtResource("4")
+texture_hover = ExtResource("4")
+texture_disabled = ExtResource("4")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -271,25 +251,25 @@ layout_mode = 2
 
 [node name="SocialLabel" type="Label" parent="AboutPopUp/VBoxContainer/GridContainer"]
 layout_mode = 2
-text = "Social : "
+text = "社交："
 
 [node name="TumblrButton" type="TextureButton" parent="AboutPopUp/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture_normal = ExtResource("7_ja8k8")
-texture_pressed = ExtResource("7_ja8k8")
-texture_hover = ExtResource("7_ja8k8")
-texture_disabled = ExtResource("7_ja8k8")
+texture_normal = ExtResource("5")
+texture_pressed = ExtResource("5")
+texture_hover = ExtResource("5")
+texture_disabled = ExtResource("5")
 ignore_texture_size = true
 stretch_mode = 0
 
 [node name="RedditButton" type="TextureButton" parent="AboutPopUp/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture_normal = ExtResource("8_3p41m")
-texture_pressed = ExtResource("8_3p41m")
-texture_hover = ExtResource("8_3p41m")
-texture_disabled = ExtResource("8_3p41m")
+texture_normal = ExtResource("6")
+texture_pressed = ExtResource("6")
+texture_hover = ExtResource("6")
+texture_disabled = ExtResource("6")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -307,7 +287,7 @@ offset_bottom = 143.0
 
 [node name="TempLabel" type="Label" parent="TempPopUp/VBoxContainer"]
 layout_mode = 2
-text = "Choose Demo :"
+text = "选择演示："
 horizontal_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="TempPopUp/VBoxContainer"]
@@ -318,8 +298,8 @@ columns = 2
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Basic Demo"
-icon = ExtResource("9_hrvuv")
+text = "基础演示"
+icon = ExtResource("7")
 expand_icon = true
 
 [node name="BGTempButton" type="Button" parent="TempPopUp/VBoxContainer/GridContainer"]
@@ -327,24 +307,24 @@ visible = false
 custom_minimum_size = Vector2(320, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Model With Background Demo"
-icon = ExtResource("10_apeyf")
+text = "带背景的模型演示"
+icon = ExtResource("8")
 expand_icon = true
 
 [node name="NormalmTempButton" type="Button" parent="TempPopUp/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(220, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "NormalMap Demo"
-icon = ExtResource("11_bgxcq")
+text = "法线贴图演示"
+icon = ExtResource("9")
 expand_icon = true
 
 [node name="FollowMouseTempButton" type="Button" parent="TempPopUp/VBoxContainer/GridContainer"]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Follow Mouse Demo"
-icon = ExtResource("12_bmktp")
+text = "跟随鼠标演示"
+icon = ExtResource("10")
 expand_icon = true
 
 [node name="AssetTempButton" type="Button" parent="TempPopUp/VBoxContainer/GridContainer"]
@@ -352,8 +332,8 @@ custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/icon_max_width = 37
-text = "Asset Model Demo"
-icon = ExtResource("13_f2y74")
+text = "资源模型演示"
+icon = ExtResource("11")
 
 [node name="CreditPopUp" type="PopupPanel" parent="."]
 unique_name_in_owner = true
@@ -364,23 +344,20 @@ size = Vector2i(435, 207)
 [node name="VBoxContainer" type="VBoxContainer" parent="CreditPopUp"]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 431.0
-offset_bottom = 222.0
+offset_right = 468.0
+offset_bottom = 203.0
 
 [node name="AboutLabel" type="Label" parent="CreditPopUp/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "About
-"
+text = "关于"
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="CreditPopUp/VBoxContainer"]
 layout_mode = 2
-text = "This is a PNGTubing App made to be as lightweight 
-and easy to use as possible.
-This app is based off PNGTuber+.
-Main goal is to implement new features as fix bugs 
-from the original software and improve existing ones."
+text = "这是一个PNGTubing应用程序，旨在尽可能轻量级和易于使用。
+此应用程序基于PNGTuber+。
+主要目标是实现新功能，修复原始软件中的错误并改进现有功能。"
 
 [node name="Background" type="PopupPanel" parent="."]
 unique_name_in_owner = true

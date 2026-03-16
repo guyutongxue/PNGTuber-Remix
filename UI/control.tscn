@@ -1,22 +1,22 @@
 [gd_scene load_steps=19 format=3 uid="uid://ngta1o5yiqxs"]
 
-[ext_resource type="Script" uid="uid://dvpyywoct4riy" path="res://Scripts/UI/control.gd" id="1_1r6xj"]
-[ext_resource type="Script" uid="uid://bpegrg5a15v2v" path="res://Scripts/UI/UIInput.gd" id="3_1eur5"]
-[ext_resource type="Script" uid="uid://74mv3eeev8pt" path="res://Scripts/UI/Others/cam_zoom.gd" id="4_epu7g"]
-[ext_resource type="Texture2D" uid="uid://dst8ervfhipkm" path="res://UI/Assets/ZoominButton.png" id="4_in571"]
-[ext_resource type="PackedScene" uid="uid://cpcj4o080w37m" path="res://UI/EditorUI/LeftUI/left_panel.tscn" id="5_0cvxm"]
-[ext_resource type="Texture2D" uid="uid://bxuqwqa2tk5j8" path="res://UI/Assets/ZoomOutButton.png" id="5_epu7g"]
-[ext_resource type="PackedScene" uid="uid://duk3smjtw111j" path="res://UI/EditorUI/RightUI/Components/wiggle.tscn" id="6_63lps"]
-[ext_resource type="Texture2D" uid="uid://cje55ikf44l63" path="res://UI/Assets/ZoomResetMainButton.png" id="6_seimj"]
-[ext_resource type="PackedScene" uid="uid://w2l13b1625f6" path="res://UI/EditorUI/RightUI/Components/animation_tab.tscn" id="7_1r6xj"]
-[ext_resource type="PackedScene" uid="uid://cwtfmnxmnl7h3" path="res://UI/EditorUI/RightUI/Components/light.tscn" id="7_4jud0"]
-[ext_resource type="PackedScene" uid="uid://nh83ldjgbynt" path="res://UI/EditorUI/RightUI/Components/model_anim.tscn" id="8_1r6xj"]
-[ext_resource type="PackedScene" uid="uid://c3f86pv0can01" path="res://UI/EditorUI/RightUI/Components/properties.tscn" id="8_i4djb"]
-[ext_resource type="Texture2D" uid="uid://di8kyreps7pl0" path="res://UI/Assets/PencilButton.png" id="8_seimj"]
-[ext_resource type="PackedScene" uid="uid://ccvo3k5t6lis6" path="res://UI/EditorUI/RightUI/Components/movement.tscn" id="9_fwbkq"]
-[ext_resource type="PackedScene" uid="uid://bk2xbsvlmq0or" path="res://UI/StateButton/state_panel.tscn" id="10_1r6xj"]
-[ext_resource type="Script" uid="uid://dy1cd6xda1pu5" path="res://UI/BetterSlider/BetterToggles.gd" id="10_ncust"]
-[ext_resource type="PackedScene" uid="uid://clxl1gighe78l" path="res://UI/BetterSlider/better_slider.tscn" id="11_ejqfc"]
+[ext_resource type="Script" uid="uid://dvpyywoct4riy" path="res://Scripts/UI/control.gd" id="1"]
+[ext_resource type="Script" uid="uid://bpegrg5a15v2v" path="res://Scripts/UI/UIInput.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cpcj4o080w37m" path="res://UI/EditorUI/LeftUI/left_panel.tscn" id="3"]
+[ext_resource type="Script" uid="uid://74mv3eeev8pt" path="res://Scripts/UI/Others/cam_zoom.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://dst8ervfhipkm" path="res://UI/Assets/ZoominButton.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bxuqwqa2tk5j8" path="res://UI/Assets/ZoomOutButton.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cje55ikf44l63" path="res://UI/Assets/ZoomResetMainButton.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://di8kyreps7pl0" path="res://UI/Assets/PencilButton.png" id="8"]
+[ext_resource type="PackedScene" uid="uid://c3f86pv0can01" path="res://UI/EditorUI/RightUI/Components/properties.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://ccvo3k5t6lis6" path="res://UI/EditorUI/RightUI/Components/movement.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://duk3smjtw111j" path="res://UI/EditorUI/RightUI/Components/wiggle.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://w2l13b1625f6" path="res://UI/EditorUI/RightUI/Components/animation_tab.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://nh83ldjgbynt" path="res://UI/EditorUI/RightUI/Components/model_anim.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://cwtfmnxmnl7h3" path="res://UI/EditorUI/RightUI/Components/light.tscn" id="14"]
+[ext_resource type="Script" uid="uid://dy1cd6xda1pu5" path="res://UI/BetterSlider/BetterToggles.gd" id="15"]
+[ext_resource type="PackedScene" uid="uid://clxl1gighe78l" path="res://UI/BetterSlider/better_slider.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://bk2xbsvlmq0or" path="res://UI/StateButton/state_panel.tscn" id="17"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1r6xj"]
 blend_mode = 1
@@ -31,11 +31,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-script = ExtResource("1_1r6xj")
+script = ExtResource("1")
 
 [node name="UIInput" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("3_1eur5")
+script = ExtResource("2")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 unique_name_in_owner = true
@@ -48,7 +48,7 @@ grow_vertical = 2
 mouse_filter = 2
 split_offset = -2000
 
-[node name="LeftPanel" parent="HSplitContainer" instance=ExtResource("5_0cvxm")]
+[node name="LeftPanel" parent="HSplitContainer" instance=ExtResource("3")]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -80,7 +80,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 alignment = 2
-script = ExtResource("4_epu7g")
+script = ExtResource("4")
 
 [node name="ZoomInButton" type="Button" parent="HSplitContainer/HSplit/AspectRatioContainer/CamZoom"]
 unique_name_in_owner = true
@@ -88,7 +88,7 @@ custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
 tooltip_text = "Mini-View Zoom In"
 focus_mode = 0
-icon = ExtResource("4_in571")
+icon = ExtResource("5")
 icon_alignment = 1
 expand_icon = true
 
@@ -98,7 +98,7 @@ custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
 tooltip_text = "Mini-View Zoom Out"
 focus_mode = 0
-icon = ExtResource("5_epu7g")
+icon = ExtResource("6")
 icon_alignment = 1
 expand_icon = true
 
@@ -108,12 +108,13 @@ custom_minimum_size = Vector2(28, 28)
 layout_mode = 2
 tooltip_text = "Main-View Zoom Reset"
 focus_mode = 0
-icon = ExtResource("6_seimj")
+icon = ExtResource("7")
 icon_alignment = 1
 expand_icon = true
 
 [node name="RightPanel" type="Panel" parent="HSplitContainer/HSplit"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(410, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -151,7 +152,7 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("8_seimj")
+texture = ExtResource("8")
 expand_mode = 1
 stretch_mode = 5
 
@@ -179,27 +180,28 @@ theme_override_constants/side_margin = 1
 theme_override_font_sizes/font_size = 13
 current_tab = 0
 
-[node name="Properties" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("8_i4djb")]
-layout_mode = 2
-
-[node name="Movement" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("9_fwbkq")]
+[node name="Properties" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("9")]
 visible = false
 layout_mode = 2
 
-[node name="Wiggle" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("6_63lps")]
+[node name="Movement" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("10")]
+visible = false
 layout_mode = 2
 
-[node name="Animation" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("7_1r6xj")]
+[node name="Wiggle" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("11")]
+layout_mode = 2
+
+[node name="Animation" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("12")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="Model" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("8_1r6xj")]
+[node name="Model" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("13")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="Light" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("7_4jud0")]
+[node name="Light" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer" instance=ExtResource("14")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 5
@@ -306,11 +308,11 @@ max_value = 12.0
 layout_mode = 2
 tooltip_text = "Animates SpriteSheet depending on mouse position (Horizontally and Vertically)"
 text = "Animate to Mouse"
-script = ExtResource("10_ncust")
+script = ExtResource("15")
 sp_type = "Sprite2D"
 value_to_update = "animate_to_mouse"
 
-[node name="BetterSlider" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Tests/ScrollContainer6/MarginContainer/VBoxContainer" instance=ExtResource("11_ejqfc")]
+[node name="BetterSlider" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer/ScrollContainer/Tests/ScrollContainer6/MarginContainer/VBoxContainer" instance=ExtResource("16")]
 layout_mode = 2
 sp_type = "Sprite2D"
 label_text = "Anim-Speed : "
@@ -324,11 +326,11 @@ value_to_update = "animate_to_mouse_speed"
 layout_mode = 2
 tooltip_text = "Animate to Mouse must be turned on in order for this feature to work when toggled off, it stops the sprite from moving on the x and y axis, but keeps the Animate to Mouse working."
 text = "Move with Mouse"
-script = ExtResource("10_ncust")
+script = ExtResource("15")
 sp_type = "Sprite2D"
 value_to_update = "animate_to_mouse_track_pos"
 
-[node name="StatePanel" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer" instance=ExtResource("10_1r6xj")]
+[node name="StatePanel" parent="HSplitContainer/HSplit/RightPanel/Properties/VSplitContainer" instance=ExtResource("17")]
 layout_mode = 2
 
 [connection signal="pressed" from="HSplitContainer/HSplit/AspectRatioContainer/CamZoom/ZoomInButton" to="HSplitContainer/HSplit/AspectRatioContainer/CamZoom" method="_on_zoom_in_button_pressed"]

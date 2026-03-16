@@ -1,15 +1,15 @@
 [gd_scene load_steps=15 format=3 uid="uid://cfjpkynuomjse"]
 
-[ext_resource type="Texture2D" uid="uid://djvq48ngt4g2q" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/Collapse1.png" id="1_6761a"]
-[ext_resource type="Script" uid="uid://dqnua0hhs6yr4" path="res://UI/EditorUI/LeftUI/Components/LayerView/Scripts/layer_item.gd" id="1_l3niq"]
-[ext_resource type="Texture2D" uid="uid://prj2o2vhe2nu" path="res://UI/EditorUI/LeftUI/Components/LayerView/PlaceholderText.svg" id="1_msyel"]
-[ext_resource type="Texture2D" uid="uid://mygcxkn7mfd0" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/Intendation3.png" id="2_t3juo"]
-[ext_resource type="Texture2D" uid="uid://bxbkfc7segv4a" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/Collapse2.png" id="2_wqf1w"]
-[ext_resource type="Texture2D" uid="uid://7xs26y1ql3fh" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/Intendation2.png" id="3_t7tql"]
-[ext_resource type="Texture2D" uid="uid://b4uqpuebx4wp6" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/MoveUp.png" id="5_2xg42"]
-[ext_resource type="Texture2D" uid="uid://ck3oi6y0rhow4" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/MoveDown.png" id="6_mmski"]
-[ext_resource type="Texture2D" uid="uid://dmp476rwkambq" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/EyeButton.png" id="7_0ogu2"]
-[ext_resource type="Texture2D" uid="uid://fq0xpdjqn7sk" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/EyeButton2.png" id="8_cfyu2"]
+[ext_resource type="Script" uid="uid://dqnua0hhs6yr4" path="res://UI/EditorUI/LeftUI/Components/LayerView/Scripts/layer_item.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://mygcxkn7mfd0" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/Intendation3.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://7xs26y1ql3fh" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/Intendation2.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://djvq48ngt4g2q" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/Collapse1.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bxbkfc7segv4a" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/Collapse2.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://dmp476rwkambq" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/EyeButton.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://fq0xpdjqn7sk" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/EyeButton2.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://prj2o2vhe2nu" path="res://UI/EditorUI/LeftUI/Components/LayerView/PlaceholderText.svg" id="8"]
+[ext_resource type="Texture2D" uid="uid://b4uqpuebx4wp6" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/MoveUp.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://ck3oi6y0rhow4" path="res://UI/EditorUI/LeftUI/Components/LayerView/Assets/New folder/MoveDown.png" id="10"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_go0j8"]
 
@@ -27,7 +27,6 @@ border_width_bottom = 1
 [sub_resource type="ImageTexture" id="ImageTexture_slif5"]
 
 [node name="VBoxContainer" type="VBoxContainer"]
-anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 29.0
 grow_horizontal = 2
@@ -42,7 +41,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 focus_mode = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_go0j8")
-script = ExtResource("1_l3niq")
+script = ExtResource("1")
 
 [node name="HSeparator2" type="HSeparator" parent="LayerItem"]
 visible = false
@@ -91,7 +90,7 @@ offset_right = 2.0
 offset_bottom = -16.0
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_t3juo")
+texture = ExtResource("2")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -109,7 +108,7 @@ offset_bottom = 13.957
 size_flags_horizontal = 0
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("3_t7tql")
+texture = ExtResource("3")
 expand_mode = 1
 
 [node name="LayerVBox" type="VBoxContainer" parent="LayerItem/Layout"]
@@ -130,8 +129,8 @@ size_flags_vertical = 4
 mouse_filter = 1
 disabled = true
 toggle_mode = true
-texture_normal = ExtResource("1_6761a")
-texture_pressed = ExtResource("2_wqf1w")
+texture_normal = ExtResource("4")
+texture_pressed = ExtResource("5")
 texture_disabled = SubResource("ImageTexture_slif5")
 stretch_mode = 0
 
@@ -147,8 +146,8 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 toggle_mode = true
-texture_normal = ExtResource("7_0ogu2")
-texture_pressed = ExtResource("8_cfyu2")
+texture_normal = ExtResource("6")
+texture_pressed = ExtResource("7")
 
 [node name="Icon" type="TextureRect" parent="LayerItem/Layout/LayerVBox/LayerHBox"]
 unique_name_in_owner = true
@@ -157,7 +156,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 mouse_filter = 2
-texture = ExtResource("1_msyel")
+texture = ExtResource("8")
 expand_mode = 1
 stretch_mode = 5
 
@@ -175,7 +174,7 @@ custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-texture_normal = ExtResource("5_2xg42")
+texture_normal = ExtResource("9")
 stretch_mode = 0
 
 [node name="MoveDown" type="TextureButton" parent="LayerItem/Layout/LayerVBox/LayerHBox"]
@@ -184,7 +183,7 @@ custom_minimum_size = Vector2(12, 12)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-texture_normal = ExtResource("6_mmski")
+texture_normal = ExtResource("10")
 
 [node name="Drop2" type="ColorRect" parent="LayerItem"]
 custom_minimum_size = Vector2(0, 4)

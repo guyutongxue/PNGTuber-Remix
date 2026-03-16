@@ -1,17 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://bdsqs0utx8bji"]
 
-[ext_resource type="Script" uid="uid://dm7ls5xafux6h" path="res://Scripts/UI/StreamUI/s_top_ui_scripts.gd" id="1_cn6el"]
+[ext_resource type="Script" uid="uid://dm7ls5xafux6h" path="res://Scripts/UI/StreamUI/s_top_ui_scripts.gd" id="1"]
 
 [node name="STopUI" type="Panel"]
 custom_minimum_size = Vector2(0, 28)
-anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 28.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 
 [node name="STopUIScripts" type="Node" parent="."]
-script = ExtResource("1_cn6el")
+script = ExtResource("1")
 
 [node name="TopButtons" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 28)
@@ -26,26 +25,20 @@ grow_vertical = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "File"
-item_count = 4
-popup/item_0/text = "Open Model"
+text = "文件"
+item_count = 1
+popup/item_0/text = "打开模型"
 popup/item_0/id = 0
-popup/item_1/text = "Open Settings"
-popup/item_1/id = 1
-popup/item_2/text = "Save Settings"
-popup/item_2/id = 2
-popup/item_3/text = "Switch Session"
-popup/item_3/id = 3
 
 [node name="ModeButton" type="MenuButton" parent="TopButtons"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "Mode"
+text = "模式"
 item_count = 2
-popup/item_0/text = "Setup"
+popup/item_0/text = "设置"
 popup/item_0/id = 0
-popup/item_1/text = "Stream"
+popup/item_1/text = "直播"
 popup/item_1/id = 1
 
 [node name="BGButton" type="MenuButton" parent="TopButtons"]
@@ -54,45 +47,45 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 16
-text = " BG Color "
+text = " 背景颜色 "
 item_count = 7
-popup/item_0/text = "Red"
+popup/item_0/text = "红色"
 popup/item_0/id = 0
-popup/item_1/text = "Blue"
+popup/item_1/text = "蓝色"
 popup/item_1/id = 1
-popup/item_2/text = "Green"
+popup/item_2/text = "绿色"
 popup/item_2/id = 2
-popup/item_3/text = "Magenta"
+popup/item_3/text = "洋红色"
 popup/item_3/id = 3
-popup/item_4/text = "Transparent"
+popup/item_4/text = "透明"
 popup/item_4/id = 4
-popup/item_5/text = "Gray"
+popup/item_5/text = "灰色"
 popup/item_5/id = 5
-popup/item_6/text = "Custom"
+popup/item_6/text = "自定义"
 popup/item_6/id = 6
 
 [node name="SettingsButton" type="MenuButton" parent="TopButtons"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-text = "Settings"
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
+text = "设置"
 
 [node name="WindowButton" type="MenuButton" parent="TopButtons"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 16
-text = " Window "
+text = " 窗口 "
 item_count = 4
-popup/item_0/text = "Toggle Borders"
+popup/item_0/text = "切换边框"
 popup/item_0/id = 0
-popup/item_1/text = "Save Window (position, size, etc..)"
+popup/item_1/text = "保存窗口（位置、大小等）"
 popup/item_1/id = 1
-popup/item_2/text = "Always on top"
+popup/item_2/text = "总是置顶"
 popup/item_2/checkable = 1
 popup/item_2/id = 2
-popup/item_3/text = "Center Window"
+popup/item_3/text = "居中窗口"
 popup/item_3/id = 3
 
 [node name="WindowSize" type="Label" parent="TopButtons"]
@@ -102,7 +95,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 11
-text = "Window Size (0,0)"
+text = "窗口大小 (0,0)"
 horizontal_alignment = 1
 vertical_alignment = 1
 

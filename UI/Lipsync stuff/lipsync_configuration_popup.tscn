@@ -1,24 +1,24 @@
 [gd_scene load_steps=23 format=3 uid="uid://dvq0c1qpx2vo5"]
 
-[ext_resource type="Texture2D" uid="uid://ci6qr5aaw55b4" path="res://Misc/TestAssets/MouthAssets/MouthTH.png" id="1_au3fa"]
-[ext_resource type="Script" uid="uid://b5dn8nbq7bfa1" path="res://Scripts/Lipsync Scripts/lipsync_configuration_popup.gd" id="1_hl02m"]
-[ext_resource type="Texture2D" uid="uid://cqgd1q4i527o8" path="res://Misc/TestAssets/MouthAssets/MouthS.png" id="2_ppb5f"]
-[ext_resource type="Script" uid="uid://dahlt80hulmva" path="res://Scripts/Lipsync Scripts/calibration_tree.gd" id="2_yucjp"]
-[ext_resource type="Texture2D" uid="uid://b8y26ab24g2o4" path="res://Misc/TestAssets/MouthAssets/MouthT.png" id="3_cs6of"]
-[ext_resource type="Texture2D" uid="uid://2aquomstqx5g" path="res://Misc/TestAssets/MouthAssets/MouthE.png" id="4_pxbl8"]
-[ext_resource type="Texture2D" uid="uid://duqct75wvludd" path="res://Misc/TestAssets/MouthAssets/MouthF.png" id="5_t75vy"]
-[ext_resource type="Texture2D" uid="uid://bbhn0ux53cai4" path="res://Misc/TestAssets/MouthAssets/MouthI.png" id="6_qsbug"]
-[ext_resource type="Texture2D" uid="uid://cx8254iqhjen8" path="res://Misc/TestAssets/MouthAssets/MouthO.png" id="7_gbjfb"]
-[ext_resource type="Texture2D" uid="uid://drbtaj374ybx7" path="res://Misc/TestAssets/MouthAssets/MouthB.png" id="8_2mt7e"]
-[ext_resource type="Texture2D" uid="uid://cs2yi8g32k5xm" path="res://Misc/TestAssets/MouthAssets/MouthR.png" id="9_eceqa"]
-[ext_resource type="Texture2D" uid="uid://defjl4banm5tn" path="res://Misc/TestAssets/MouthAssets/MouthU.png" id="10_n5m1q"]
-[ext_resource type="Texture2D" uid="uid://bh6q1bq10dkrv" path="res://Misc/TestAssets/MouthAssets/MouthA.png" id="11_df0wv"]
-[ext_resource type="Texture2D" uid="uid://bp33kti2vyvhb" path="res://Misc/TestAssets/MouthAssets/MouthG.png" id="12_tc06v"]
-[ext_resource type="Texture2D" uid="uid://7w6o1538wfy3" path="res://Misc/TestAssets/MouthAssets/MouthL.png" id="13_qbydv"]
-[ext_resource type="Texture2D" uid="uid://bx0wddxqvmjvb" path="res://Misc/TestAssets/MouthAssets/MouthSilent.png" id="14_m2i65"]
-[ext_resource type="Script" uid="uid://bfvds6wsw0wsg" path="res://Scripts/Lipsync Scripts/inspector_tab.gd" id="17_c25av"]
-[ext_resource type="Script" uid="uid://bu4wponkf4i03" path="res://Scripts/Lipsync Scripts/fingerprint_tab.gd" id="18_cl2hy"]
-[ext_resource type="Script" uid="uid://ceitfwi6o8fx5" path="res://Scripts/Lipsync Scripts/phonemes_tab.gd" id="19_uhohj"]
+[ext_resource type="Script" uid="uid://b5dn8nbq7bfa1" path="res://Scripts/Lipsync Scripts/lipsync_configuration_popup.gd" id="1"]
+[ext_resource type="Script" uid="uid://dahlt80hulmva" path="res://Scripts/Lipsync Scripts/calibration_tree.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://ci6qr5aaw55b4" path="res://Misc/TestAssets/MouthAssets/MouthTH.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cqgd1q4i527o8" path="res://Misc/TestAssets/MouthAssets/MouthS.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://b8y26ab24g2o4" path="res://Misc/TestAssets/MouthAssets/MouthT.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://2aquomstqx5g" path="res://Misc/TestAssets/MouthAssets/MouthE.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://duqct75wvludd" path="res://Misc/TestAssets/MouthAssets/MouthF.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bbhn0ux53cai4" path="res://Misc/TestAssets/MouthAssets/MouthI.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://cx8254iqhjen8" path="res://Misc/TestAssets/MouthAssets/MouthO.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://drbtaj374ybx7" path="res://Misc/TestAssets/MouthAssets/MouthB.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://cs2yi8g32k5xm" path="res://Misc/TestAssets/MouthAssets/MouthR.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://defjl4banm5tn" path="res://Misc/TestAssets/MouthAssets/MouthU.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://bh6q1bq10dkrv" path="res://Misc/TestAssets/MouthAssets/MouthA.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://bp33kti2vyvhb" path="res://Misc/TestAssets/MouthAssets/MouthG.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://7w6o1538wfy3" path="res://Misc/TestAssets/MouthAssets/MouthL.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://bx0wddxqvmjvb" path="res://Misc/TestAssets/MouthAssets/MouthSilent.png" id="16"]
+[ext_resource type="Script" uid="uid://bfvds6wsw0wsg" path="res://Scripts/Lipsync Scripts/inspector_tab.gd" id="17"]
+[ext_resource type="Script" uid="uid://bu4wponkf4i03" path="res://Scripts/Lipsync Scripts/fingerprint_tab.gd" id="18"]
+[ext_resource type="Script" uid="uid://ceitfwi6o8fx5" path="res://Scripts/Lipsync Scripts/phonemes_tab.gd" id="19"]
 
 [sub_resource type="Gradient" id="Gradient_m67kp"]
 offsets = PackedFloat32Array(0, 0.154717)
@@ -32,46 +32,46 @@ fill_to = Vector2(0, 1)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_au3fa")
+"texture": ExtResource("3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_ppb5f")
+"texture": ExtResource("4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_cs6of")
+"texture": ExtResource("5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_pxbl8")
+"texture": ExtResource("6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_t75vy")
+"texture": ExtResource("7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_qsbug")
+"texture": ExtResource("8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_gbjfb")
+"texture": ExtResource("9")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_2mt7e")
+"texture": ExtResource("10")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_eceqa")
+"texture": ExtResource("11")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_n5m1q")
+"texture": ExtResource("12")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_df0wv")
+"texture": ExtResource("13")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_tc06v")
+"texture": ExtResource("14")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_qbydv")
+"texture": ExtResource("15")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_m2i65")
+"texture": ExtResource("16")
 }],
 "loop": false,
 "name": &"MouthAnimations",
@@ -84,7 +84,7 @@ initial_position = 2
 size = Vector2i(1000, 600)
 transient = true
 exclusive = true
-script = ExtResource("1_hl02m")
+script = ExtResource("1")
 
 [node name="BG" type="TextureRect" parent="."]
 anchors_preset = 15
@@ -116,15 +116,11 @@ layout_mode = 2
 [node name="FilesButton" type="MenuButton" parent="VBoxContainer/TopMenu/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
-text = "Files"
-item_count = 3
-popup/item_0/text = "New File"
-popup/item_0/id = 0
-popup/item_1/text = "Load LipSync File"
-popup/item_1/id = 1
-popup/item_2/text = "Save LipSync File"
-popup/item_2/id = 2
+size_flags_horizontal = 4
+text = "文件"
+item_count = 1
+popup/item_0/text = "加载唇同步文件"
+popup/item_0/id = 1
 
 [node name="UIContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -151,7 +147,7 @@ theme_override_constants/margin_bottom = 3
 [node name="CalibrationTree" type="Tree" parent="VBoxContainer/UIContainer/TreePanel/MarginContainer"]
 layout_mode = 2
 columns = 2
-script = ExtResource("2_yucjp")
+script = ExtResource("2")
 
 [node name="VBox" type="VBoxContainer" parent="VBoxContainer/UIContainer"]
 layout_mode = 2
@@ -201,7 +197,7 @@ size_flags_horizontal = 0
 [node name="Label" type="Label" parent="VBoxContainer/UIContainer/VBox/BottomPanel/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "Inspector"
+text = "检查器"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -210,7 +206,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
-script = ExtResource("17_c25av")
+script = ExtResource("17")
 calibration_tree = NodePath("../../../../../TreePanel/MarginContainer/CalibrationTree")
 
 [node name="Insp1" type="ProgressBar" parent="VBoxContainer/UIContainer/VBox/BottomPanel/HBoxContainer/VBoxContainer/Inspect"]
@@ -399,8 +395,9 @@ size_flags_horizontal = 3
 current_tab = 0
 
 [node name="Spectrum" type="TabBar" parent="VBoxContainer/UIContainer/VBox/BottomPanel/HBoxContainer/Stuff"]
+visible = false
 layout_mode = 2
-script = ExtResource("18_cl2hy")
+script = ExtResource("18")
 metadata/_tab_index = 0
 
 [node name="SpecBars" type="HBoxContainer" parent="VBoxContainer/UIContainer/VBox/BottomPanel/HBoxContainer/Stuff/Spectrum"]
@@ -595,7 +592,7 @@ show_percentage = false
 [node name="Phonemes" type="TabBar" parent="VBoxContainer/UIContainer/VBox/BottomPanel/HBoxContainer/Stuff" node_paths=PackedStringArray("sprite")]
 visible = false
 layout_mode = 2
-script = ExtResource("19_uhohj")
+script = ExtResource("19")
 sprite = NodePath("../../../../PreviewBG/Pos/Shapes")
 metadata/_tab_index = 1
 
