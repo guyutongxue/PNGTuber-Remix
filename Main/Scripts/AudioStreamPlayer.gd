@@ -7,8 +7,8 @@ var record_effect : AudioEffectRecord
 const VU_COUNT = 4
 const HEIGHT = 40
 const  MAX_FREQ = 11050.0
-const MIC_RESTART_TIME: float = 1800
-const MIC_RESTART_TIME_FIX: float = 600
+const MIC_RESTART_TIME: float = 3600
+const MIC_RESTART_TIME_FIX: float = 1200
 var bar_stuff = []
 var used_bar = 0
 

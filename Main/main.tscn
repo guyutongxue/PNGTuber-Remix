@@ -1,20 +1,20 @@
 [gd_scene load_steps=17 format=3 uid="uid://b28gjkefgi5bs"]
 
-[ext_resource type="Script" uid="uid://bn6wdd2hwqxfp" path="res://Main/Scripts/main.gd" id="1_6pthk"]
-[ext_resource type="Script" uid="uid://u4rstm0uk8wb" path="res://Scripts/Misc/file_importer.gd" id="2_j4lix"]
-[ext_resource type="Script" uid="uid://b6atx7ybrp5sq" path="res://Main/Scripts/SpritesContainer.gd" id="2_lv028"]
-[ext_resource type="PackedScene" uid="uid://ngta1o5yiqxs" path="res://UI/control.tscn" id="2_micm1"]
-[ext_resource type="Script" uid="uid://qgnk6t8mi76s" path="res://Scripts/UI/WindowHandler/window_handler.gd" id="2_o60nc"]
-[ext_resource type="PackedScene" uid="uid://dw4brgrpdpurf" path="res://Misc/LightSource/light_source.tscn" id="3_eo07p"]
-[ext_resource type="Shader" uid="uid://brpv37x267rmr" path="res://Scripts/Shaders/ColorBlindness.gdshader" id="3_o60nc"]
-[ext_resource type="Shader" uid="uid://bc5tbhguskdv2" path="res://Scripts/Shaders/ModelEffects.gdshader" id="3_rj11h"]
-[ext_resource type="Theme" uid="uid://c5v4ocnimqa4i" path="res://Themes/WhiteTheme/WhiteTheme.tres" id="5_4hh1t"]
-[ext_resource type="Script" uid="uid://by4pbr6yeut1c" path="res://Main/Scripts/monitor_tracking.gd" id="5_rj11h"]
-[ext_resource type="PackedScene" uid="uid://bpmlfhv30o08l" path="res://UI/EditorUI/TopUI/top_ui.tscn" id="7_qwnpc"]
+[ext_resource type="Script" uid="uid://bn6wdd2hwqxfp" path="res://Main/Scripts/main.gd" id="1"]
+[ext_resource type="Script" uid="uid://qgnk6t8mi76s" path="res://Scripts/UI/WindowHandler/window_handler.gd" id="2"]
+[ext_resource type="Script" uid="uid://u4rstm0uk8wb" path="res://Scripts/Misc/file_importer.gd" id="3"]
+[ext_resource type="Shader" uid="uid://brpv37x267rmr" path="res://Scripts/Shaders/ColorBlindness.gdshader" id="4"]
+[ext_resource type="Script" uid="uid://b6atx7ybrp5sq" path="res://Main/Scripts/SpritesContainer.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://dw4brgrpdpurf" path="res://Misc/LightSource/light_source.tscn" id="6"]
+[ext_resource type="Shader" uid="uid://bc5tbhguskdv2" path="res://Scripts/Shaders/ModelEffects.gdshader" id="7"]
+[ext_resource type="Script" uid="uid://by4pbr6yeut1c" path="res://Main/Scripts/monitor_tracking.gd" id="8"]
+[ext_resource type="Theme" uid="uid://c5v4ocnimqa4i" path="res://Themes/WhiteTheme/WhiteTheme.tres" id="9"]
+[ext_resource type="PackedScene" uid="uid://bpmlfhv30o08l" path="res://UI/EditorUI/TopUI/top_ui.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://ngta1o5yiqxs" path="res://UI/control.tscn" id="11"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3gf5"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y4wgn"]
 resource_local_to_scene = true
-shader = ExtResource("3_o60nc")
+shader = ExtResource("4")
 shader_parameter/severity = 0.5
 shader_parameter/effect = 0
 
@@ -26,7 +26,7 @@ colors = PackedColorArray(0.709965, 0.196036, 0.771008, 1, 1, 1, 0, 1, 0.630854,
 gradient = SubResource("Gradient_qac2q")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qac2q"]
-shader = ExtResource("3_rj11h")
+shader = ExtResource("7")
 shader_parameter/effect = 0
 shader_parameter/ScaleMult = Vector2(1, 1)
 shader_parameter/AuraProgres = 0.4
@@ -72,7 +72,7 @@ shader_parameter/bound_width_a = 0.0
 shader_parameter/corner_a = 0.0
 shader_parameter/uv_scale = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_rj11h"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_jlcik"]
 viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [node name="Main" type="Control"]
@@ -83,14 +83,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_6pthk")
+script = ExtResource("1")
 
 [node name="WindowHandler" type="Node" parent="."]
-script = ExtResource("2_o60nc")
+script = ExtResource("2")
 
 [node name="FileImporter" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_j4lix")
+script = ExtResource("3")
 
 [node name="ConfirmTrim" type="ConfirmationDialog" parent="FileImporter"]
 unique_name_in_owner = true
@@ -104,7 +104,7 @@ cancel_button_text = "No"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_f3gf5")
+material = SubResource("ShaderMaterial_y4wgn")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,9 +139,9 @@ texture_filter = 4
 
 [node name="SpritesContainer" type="Node2D" parent="SubViewportContainer/SubViewport/Node2D/Origin"]
 unique_name_in_owner = true
-script = ExtResource("2_lv028")
+script = ExtResource("5")
 
-[node name="LightSource" parent="SubViewportContainer/SubViewport/Node2D" instance=ExtResource("3_eo07p")]
+[node name="LightSource" parent="SubViewportContainer/SubViewport/Node2D" instance=ExtResource("6")]
 unique_name_in_owner = true
 visible = false
 light_mask = 7
@@ -161,7 +161,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = SubResource("ViewportTexture_rj11h")
+texture = SubResource("ViewportTexture_jlcik")
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
 layer = 2
@@ -180,7 +180,7 @@ pivot_offset = Vector2(20, 20)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-script = ExtResource("5_rj11h")
+script = ExtResource("8")
 
 [node name="UIHolder" type="VBoxContainer" parent="UICanvas"]
 unique_name_in_owner = true
@@ -192,15 +192,15 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-theme = ExtResource("5_4hh1t")
+theme = ExtResource("9")
 theme_override_constants/separation = -1
 
-[node name="TopUI" parent="UICanvas/UIHolder" instance=ExtResource("7_qwnpc")]
+[node name="TopUI" parent="UICanvas/UIHolder" instance=ExtResource("10")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Control" parent="UICanvas/UIHolder" instance=ExtResource("2_micm1")]
+[node name="Control" parent="UICanvas/UIHolder" instance=ExtResource("11")]
 unique_name_in_owner = true
 layout_mode = 2
 
@@ -208,7 +208,7 @@ layout_mode = 2
 unique_name_in_owner = true
 initial_position = 2
 size = Vector2i(338, 100)
-dialog_text = "Do you want to make a new PNGTuber model?"
+dialog_text = "你想要创建一个新的PNGTuber模型吗？"
 dialog_autowrap = true
 
 [node name="FileDialog" type="FileDialog" parent="."]

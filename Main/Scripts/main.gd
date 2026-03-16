@@ -42,6 +42,16 @@ func _ready():
 	Global.update_camera_smoothing()
 
 
+	if has_node("%Control"):
+		get_node("%Control").hide()
+
+
+	await get_tree().create_timer(0.2).timeout
+	var last_path = Settings.theme_settings.get("last_remix_path", "")
+	if last_path != "" and FileAccess.file_exists(last_path):
+		SaveAndLoad.load_file(last_path)
+
+
 func update_theme(new_theme : Theme = preload("res://Themes/PurpleTheme/GUITheme.tres")):
 	%UIHolder.theme = new_theme
 	%ConfirmTrim.theme = new_theme
@@ -101,6 +111,10 @@ func add_normal_sprite():
 func _on_file_dialog_file_selected(path): 
 	match current_state:
 		State.LoadFile:
+
+			if path.get_extension() == "pngRemix" or path.get_extension() == "save":
+				Settings.theme_settings.last_remix_path = path
+				Settings.save()
 			%FileImporter.trim = false
 			if path.get_extension() == "save":
 				if Settings.theme_settings.enable_trimmer:
@@ -184,7 +198,9 @@ func _on_confirmation_dialog_confirmed():
 
 func clear_sprites():
 	Global.held_sprite = null
+	Global.held_sprites.clear()
 	Global.deselect.emit()
+	UndoRedoManager.clear_undo()
 	for i in get_tree().get_nodes_in_group("Sprites"):
 		if InputMap.has_action(str(i.sprite_id)):
 			InputMap.erase_action(str(i.sprite_id))

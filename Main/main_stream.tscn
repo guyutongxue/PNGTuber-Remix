@@ -1,20 +1,20 @@
 [gd_scene load_steps=15 format=3 uid="uid://c1ekr4qs5l516"]
 
-[ext_resource type="Script" uid="uid://bdn6kp0ldq1ck" path="res://Main/Scripts/main_stream.gd" id="1_sw3on"]
-[ext_resource type="Script" uid="uid://b6atx7ybrp5sq" path="res://Main/Scripts/SpritesContainer.gd" id="1_u32ad"]
-[ext_resource type="PackedScene" uid="uid://dw4brgrpdpurf" path="res://Misc/LightSource/light_source.tscn" id="2_cj4vf"]
-[ext_resource type="Texture2D" uid="uid://c23flfaie3uxb" path="res://Misc/TestAssets/32x32grid.png" id="2_sw3on"]
-[ext_resource type="Shader" uid="uid://brpv37x267rmr" path="res://Scripts/Shaders/ColorBlindness.gdshader" id="3_me1oy"]
-[ext_resource type="PackedScene" uid="uid://cnq8tddqwvy07" path="res://UI/StreamUI/stream_ui.tscn" id="5_h43to"]
-[ext_resource type="Script" uid="uid://by4pbr6yeut1c" path="res://Main/Scripts/monitor_tracking.gd" id="5_me1oy"]
-[ext_resource type="Shader" uid="uid://bc5tbhguskdv2" path="res://Scripts/Shaders/ModelEffects.gdshader" id="6_y56ai"]
+[ext_resource type="Script" uid="uid://bdn6kp0ldq1ck" path="res://Main/Scripts/main_stream.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c23flfaie3uxb" path="res://Misc/TestAssets/32x32grid.png" id="2"]
+[ext_resource type="Shader" uid="uid://brpv37x267rmr" path="res://Scripts/Shaders/ColorBlindness.gdshader" id="3"]
+[ext_resource type="Script" uid="uid://b6atx7ybrp5sq" path="res://Main/Scripts/SpritesContainer.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://dw4brgrpdpurf" path="res://Misc/LightSource/light_source.tscn" id="5"]
+[ext_resource type="Shader" uid="uid://bc5tbhguskdv2" path="res://Scripts/Shaders/ModelEffects.gdshader" id="6"]
+[ext_resource type="Script" uid="uid://by4pbr6yeut1c" path="res://Main/Scripts/monitor_tracking.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://cnq8tddqwvy07" path="res://UI/StreamUI/stream_ui.tscn" id="8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xfo8l"]
 blend_mode = 1
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7c5n"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cp6da"]
 resource_local_to_scene = true
-shader = ExtResource("3_me1oy")
+shader = ExtResource("3")
 shader_parameter/severity = 0.5
 shader_parameter/effect = 0
 
@@ -26,7 +26,7 @@ colors = PackedColorArray(0.709965, 0.196036, 0.771008, 1, 1, 1, 0, 1, 0.630854,
 gradient = SubResource("Gradient_fwmgs")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rorxk"]
-shader = ExtResource("6_y56ai")
+shader = ExtResource("6")
 shader_parameter/effect = 0
 shader_parameter/ScaleMult = Vector2(1, 1)
 shader_parameter/AuraProgres = 0.4
@@ -72,7 +72,7 @@ shader_parameter/bound_width_a = 0.0
 shader_parameter/corner_a = 0.0
 shader_parameter/uv_scale = Vector2(2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_y4y0n"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ok5ul"]
 viewport_path = NodePath("SubViewportContainer/SubViewport")
 
 [node name="MainStream" type="Control"]
@@ -82,7 +82,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_sw3on")
+script = ExtResource("1")
 
 [node name="BG" type="TextureRect" parent="."]
 unique_name_in_owner = true
@@ -97,13 +97,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("2_sw3on")
+texture = ExtResource("2")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_d7c5n")
+material = SubResource("ShaderMaterial_cp6da")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,9 +139,9 @@ texture_filter = 4
 
 [node name="SpritesContainer" type="Node2D" parent="SubViewportContainer/SubViewport/Node2D/Origin"]
 unique_name_in_owner = true
-script = ExtResource("1_u32ad")
+script = ExtResource("4")
 
-[node name="LightSource" parent="SubViewportContainer/SubViewport/Node2D" instance=ExtResource("2_cj4vf")]
+[node name="LightSource" parent="SubViewportContainer/SubViewport/Node2D" instance=ExtResource("5")]
 unique_name_in_owner = true
 visible = false
 light_mask = 7
@@ -161,7 +161,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = SubResource("ViewportTexture_y4y0n")
+texture = SubResource("ViewportTexture_ok5ul")
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
 
@@ -179,9 +179,9 @@ pivot_offset = Vector2(20, 20)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-script = ExtResource("5_me1oy")
+script = ExtResource("7")
 
-[node name="UI" parent="UICanvas" instance=ExtResource("5_h43to")]
+[node name="UI" parent="UICanvas" instance=ExtResource("8")]
 unique_name_in_owner = true
 
 [node name="FileDialog" type="FileDialog" parent="."]
